@@ -3,6 +3,7 @@ var express = require('express'); // requre the express framework
 var app = express();
 const routes = require('./Routes/routes.cjs')
 const cors = require('cors');
+const functions = require('firebase-functions');
 
 const corsOptions = {
     origin: 'http://localhost:4200',
@@ -15,6 +16,8 @@ app.use(express.json())
 app.use(routes);
 
 // Create a server to listen at port 8080
-var server = app.listen(8080, function(){
-    console.log('App running on port localhost/8080')
+var server = app.listen(8081, function(){
+    console.log('App running on port localhost/8081')
 })
+
+exports.api = functions.https.onRequest(app);
